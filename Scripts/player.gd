@@ -2,7 +2,10 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
-const SPEED = 300.0
+var SPEED = 0
+var gravity = 300
+const top_speed = 600
+const acceleration = 3
 const JUMP_VELOCITY = -400.0
 
 
@@ -25,9 +28,15 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("Left", "Right")
 	if direction:
+		SPEED = move_toward(SPEED, top_speed, acceleration)
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		SPEED = 0
+		
+	#modify gravity based on speed
+	gravity = 300 + SPEED
+	PhysicsServer2D.area_set_param(get_viewport().find_world_2d().space, PhysicsServer2D.AREA_PARAM_GRAVITY, gravity)
 
 	move_and_slide()
 	
