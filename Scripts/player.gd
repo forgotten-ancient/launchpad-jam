@@ -4,9 +4,9 @@ extends CharacterBody2D
 
 var SPEED = 0
 var gravity = 300
-const top_speed = 600
-const acceleration = 3
-const JUMP_VELOCITY = -400.0
+var top_speed = 600
+var acceleration = 3
+var JUMP_VELOCITY = -400.0
 
 
 func _physics_process(delta: float) -> void:
@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		SPEED = move_toward(SPEED, top_speed, acceleration)
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, acceleration)
 		SPEED = 0
 		
 	#modify gravity based on speed

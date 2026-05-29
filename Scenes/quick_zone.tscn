@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ynedo7gpeg6q"]
+
+[ext_resource type="Script" uid="uid://bpisr7nyv6be5" path="res://Scripts/quick_zone.gd" id="1_qgc3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwqyh"]
+size = Vector2(73, 56.75)
+
+[node name="QuickZone" type="Node2D" unique_id=319784719]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=997381993]
+gravity = -645.397
+script = ExtResource("1_qgc3q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=505116347]
+shape = SubResource("RectangleShape2D_qwqyh")
+
+[node name="ColorRect" type="ColorRect" parent="Area2D" unique_id=1774250418]
+offset_left = -37.0
+offset_top = -28.0
+offset_right = 37.0
+offset_bottom = 29.0
+color = Color(0.9137255, 0.13725491, 0.12156863, 0.4)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
